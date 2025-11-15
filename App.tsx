@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { Dashboard } from './pages/Dashboard';
@@ -7,6 +7,7 @@ import { MyLinks } from './pages/MyLinks';
 import { Admin } from './pages/Admin';
 import { Settings } from './pages/Settings';
 import { Login } from './pages/Login';
+import { AuthCallback } from './components/AuthCallback';
 import { User, UserRole } from './types';
 
 export type Page = 'dashboard' | 'analytics' | 'my-links' | 'admin' | 'settings';
@@ -15,6 +16,7 @@ const App: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [activePage, setActivePage] = useState<Page>('dashboard');
+    const [isCallback, setIsCallback] = useState<boolean>(false);
 
     const mockUser: User = useMemo(() => ({
         id: 'user-1',
@@ -25,6 +27,14 @@ const App: React.FC = () => {
         departmentId: 'dept-1',
         teamId: 'team-1',
     }), []);
+
+    useEffect(() => {
+        // Check if this is an OAuth callback
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('code') || params.has('error')) {
+            setIsCallback(true);
+        }
+    }, []);
     
     const handleLogin = () => {
         setCurrentUser(mockUser);
@@ -32,9 +42,29 @@ const App: React.FC = () => {
         setActivePage('dashboard');
     };
 
+    const handleOAuthLoginSuccess = (user: User) => {
+        setCurrentUser(user);
+        setIsAuthenticated(true);
+        setIsCallback(false);
+        // Clean up URL
+        window.history.replaceState({}, document.title, '/');
+        setActivePage('dashboard');
+    };
+
+    const handleOAuthLoginError = (error: string) => {
+        console.error('OAuth login failed:', error);
+        setIsCallback(false);
+        // Clean up URL
+        window.history.replaceState({}, document.title, '/');
+    };
+
     const handleLogout = () => {
         setIsAuthenticated(false);
         setCurrentUser(null);
+        // Clear OAuth tokens
+        sessionStorage.removeItem('lark_access_token');
+        sessionStorage.removeItem('lark_refresh_token');
+        sessionStorage.removeItem('lark_oauth_state');
     };
 
     const renderPage = () => {
@@ -53,6 +83,16 @@ const App: React.FC = () => {
                 return <Dashboard currentUser={currentUser!} />;
         }
     };
+
+    // Handle OAuth callback
+    if (isCallback) {
+        return (
+            <AuthCallback 
+                onLoginSuccess={handleOAuthLoginSuccess}
+                onLoginError={handleOAuthLoginError}
+            />
+        );
+    }
 
     if (!isAuthenticated) {
         return <Login onLogin={handleLogin} />;
