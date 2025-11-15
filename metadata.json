@@ -1,0 +1,5 @@
+{
+  "name": "LinkHub - Internal Link Manager",
+  "description": "A comprehensive platform for managing, sharing, and analyzing internal company links. Features include a link dashboard, creation tools, analytics, QR code generation, and admin management consoles.",
+  "requestFramePermissions": []
+}
