@@ -62,8 +62,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
                     aria-current={currentPage === number ? 'page' : undefined}
                     className={`flex items-center justify-center px-3 h-8 leading-tight ${
                         currentPage === number
-                            ? 'z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
-                            : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                            ? 'z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100'
+                            : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'
                     }`}
                 >
                     {number}
@@ -99,12 +99,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
                         placeholder="Search links, tags..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border rounded-full bg-white dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full pl-10 pr-4 py-2 border rounded-full bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="w-full sm:w-auto flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-full shrink-0 sm:w-auto hover:bg-blue-700"
+                    className="w-full sm:w-auto flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-full shrink-0 sm:w-auto hover:bg-blue-600"
                 >
                     <AddIcon />
                     <span className="ml-2">Create Link</span>
@@ -117,25 +117,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
                 ))}
                  {filteredLinks.length === 0 && (
                     <div className="col-span-full text-center py-12">
-                        <p className="text-gray-500 dark:text-gray-400">No links found.</p>
+                        <p className="text-gray-500">No links found.</p>
                     </div>
                 )}
             </div>
             
             {filteredLinks.length > linksPerPage && (
                  <nav className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 pt-8" aria-label="Dashboard navigation">
-                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    <span className="text-sm font-normal text-gray-500">
                         Showing
-                        <span className="font-semibold text-gray-900 dark:text-white mx-1">{indexOfFirstLink + 1}-{Math.min(indexOfLastLink, filteredLinks.length)}</span>
+                        <span className="font-semibold text-gray-900 mx-1">{indexOfFirstLink + 1}-{Math.min(indexOfLastLink, filteredLinks.length)}</span>
                         of
-                        <span className="font-semibold text-gray-900 dark:text-white mx-1">{filteredLinks.length}</span>
+                        <span className="font-semibold text-gray-900 mx-1">{filteredLinks.length}</span>
                     </span>
                     <ul className="inline-flex items-center -space-x-px">
                         <li>
                             <button
                                 onClick={() => paginate(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
+                                className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
                             >
                                 Previous
                             </button>
@@ -145,7 +145,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
                             <button
                                 onClick={() => paginate(currentPage + 1)}
                                 disabled={currentPage === totalPages}
-                                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
+                                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
                             >
                                 Next
                             </button>

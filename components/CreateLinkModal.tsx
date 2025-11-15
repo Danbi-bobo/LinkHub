@@ -30,20 +30,20 @@ const SearchableMultiSelect: React.FC<{
 
     return (
         <div>
-            <label htmlFor={idField} className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+            <label htmlFor={idField} className="block text-sm font-medium text-gray-700">{label}</label>
             <input
                 type="search"
                 placeholder={`Search ${label.toLowerCase()}...`}
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="mt-1 mb-2 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 mb-2 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
             <select
                 id={idField}
                 multiple
                 value={selectedItems}
                 onChange={handleSelectChange}
-                className="mt-1 block w-full h-24 px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm"
+                className="mt-1 block w-full h-24 px-3 py-2 bg-white border border-gray-300 rounded-md"
             >
                 {filteredItems.map(item => <option key={item[idField]} value={item[idField]}>{displayFormatter(item)}</option>)}
             </select>
@@ -145,24 +145,24 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ onClose, onCre
 
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-center items-center" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-2xl transform transition-all" onClick={e => e.stopPropagation()}>
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Create a New Link</h2>
+        <div className="fixed inset-0 bg-white bg-opacity-75 z-40 flex justify-center items-center backdrop-blur-sm" onClick={onClose}>
+            <div className="bg-white rounded-lg border border-gray-200 p-8 w-full max-w-2xl transform transition-all" onClick={e => e.stopPropagation()}>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">Create a New Link</h2>
                 <form onSubmit={handleSubmit} className="max-h-[80vh] overflow-y-auto pr-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+                            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
                             <input
                                 type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                 required
                             />
                         </div>
                         <div>
-                            <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+                            <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
                             <select
                                 id="category" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}
-                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                             >
                                 {MOCK_CATEGORIES.map(cat => <option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>)}
                             </select>
@@ -170,37 +170,37 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ onClose, onCre
                     </div>
 
                     <div className="mt-4">
-                        <label htmlFor="url" className="block text-sm font-medium text-gray-700 dark:text-gray-300">URL</label>
+                        <label htmlFor="url" className="block text-sm font-medium text-gray-700">URL</label>
                         <input
                             type="url" id="url" value={url} onChange={(e) => setUrl(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             placeholder="https://example.com" required
                         />
                     </div>
                     <div className="mt-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
                         <textarea
                             id="description" rows={3} value={description} onChange={(e) => setDescription(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         />
                     </div>
                      <div className="mt-4">
-                        <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Tags</label>
+                        <label htmlFor="tags" className="block text-sm font-medium text-gray-700">Tags</label>
                         <input
                             type="text" id="tags" value={tags} onChange={(e) => setTags(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             placeholder="e.g. urgent, frontend, docs"
                         />
                          <p className="text-xs text-gray-500 mt-1">Comma-separated values.</p>
                     </div>
                     
-                    <div className="mt-6 p-4 border rounded-md dark:border-gray-700 space-y-4">
-                        <h3 className="text-lg font-medium text-gray-800 dark:text-white">Visibility</h3>
+                    <div className="mt-6 p-4 border rounded-md border-gray-200 space-y-4">
+                        <h3 className="text-lg font-medium text-gray-800">Visibility</h3>
                          <div>
-                            <label htmlFor="visibility" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Access Level</label>
+                            <label htmlFor="visibility" className="block text-sm font-medium text-gray-700">Access Level</label>
                             <select
                                 id="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value as LinkVisibility)}
-                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                             >
                                 <option value={LinkVisibility.PUBLIC}>Public</option>
                                 <option value={LinkVisibility.DEPARTMENT}>By Department</option>
@@ -229,7 +229,7 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ onClose, onCre
                                             setTeamFilterType(e.target.value as any);
                                             setTeamFilterId(''); // Reset selection on type change
                                         }}
-                                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                                     >
                                         <option value="all">Filter by...</option>
                                         <option value="department">Department</option>
@@ -239,7 +239,7 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ onClose, onCre
                                     <select
                                         value={teamFilterId}
                                         onChange={e => setTeamFilterId(e.target.value)}
-                                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                                         disabled={teamFilterType === 'all'}
                                     >
                                         <option value="">Select a {teamFilterType}...</option>
@@ -293,8 +293,8 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({ onClose, onCre
 
 
                     <div className="flex justify-end gap-4 mt-8">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">Cancel</button>
-                        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Create Link</button>
+                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+                        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create Link</button>
                     </div>
                 </form>
             </div>

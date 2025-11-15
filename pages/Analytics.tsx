@@ -1,16 +1,15 @@
-
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { MOCK_LINKS, MOCK_CLICK_LOGS } from '../mockData';
 
 const StatCard: React.FC<{ title: string; value: string; icon: string }> = ({ title, value, icon }) => (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg flex items-center">
-        <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
+    <div className="bg-white border border-gray-200 p-6 rounded-xl flex items-center">
+        <div className="bg-blue-100 p-3 rounded-full">
             <i className={`fa ${icon} text-blue-500 text-2xl`}></i>
         </div>
         <div className="ml-4">
-            <p className="text-gray-500 dark:text-gray-400">{title}</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
+            <p className="text-gray-500">{title}</p>
+            <p className="text-2xl font-bold text-gray-900">{value}</p>
         </div>
     </div>
 );
@@ -48,42 +47,42 @@ export const Analytics: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div className="lg:col-span-2 bg-white border border-gray-200 p-6 rounded-xl">
                      <h3 className="text-xl font-bold mb-4">Clicks Over Time</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={clicksOverTimeData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(128, 128, 128, 0.2)" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(200, 200, 200, 0.5)" />
                             <XAxis dataKey="name" />
                             <YAxis />
-                            <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none', borderRadius: '0.5rem' }} />
+                            <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '0.5rem' }} />
                             <Legend />
                             <Line type="monotone" dataKey="clicks" stroke="#3b82f6" strokeWidth={2} activeDot={{ r: 8 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div className="bg-white border border-gray-200 p-6 rounded-xl">
                     <h3 className="text-xl font-bold mb-4">Top Links</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={topLinksData} layout="vertical">
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(128, 128, 128, 0.2)"/>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(200, 200, 200, 0.5)"/>
                             <XAxis type="number" />
                             <YAxis type="category" dataKey="name" width={80} tick={{fontSize: 12}}/>
-                            <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none', borderRadius: '0.5rem' }} cursor={{fill: 'rgba(59, 130, 246, 0.1)'}}/>
+                            <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '0.5rem' }} cursor={{fill: 'rgba(59, 130, 246, 0.1)'}}/>
                             <Bar dataKey="clicks" fill="#3b82f6" barSize={20} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <div className="bg-white border border-gray-200 p-6 rounded-xl">
                 <h3 className="text-xl font-bold mb-4">Recent Activity</h3>
-                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                <ul className="divide-y divide-gray-200">
                     {recentActivity.map(log => {
                         const link = MOCK_LINKS.find(l => l.id === log.linkId);
                         return (
                             <li key={log.id} className="py-3 flex items-center justify-between">
                                 <p className="text-sm">Someone clicked on <span className="font-semibold text-blue-500">{link?.title}</span></p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">{log.timestamp.toLocaleTimeString()}</p>
+                                <p className="text-sm text-gray-500">{log.timestamp.toLocaleTimeString()}</p>
                             </li>
                         )
                     })}

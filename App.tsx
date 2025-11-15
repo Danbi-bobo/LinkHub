@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
@@ -60,11 +59,11 @@ const App: React.FC = () => {
     }
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+        <div className="flex h-screen bg-white text-gray-800">
             <Sidebar activePage={activePage} setActivePage={setActivePage} />
             <div className="flex-1 flex flex-col overflow-hidden">
                 <Header currentUser={currentUser!} onLogout={handleLogout} />
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900 p-4 sm:p-6 lg:p-8">
+                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
                     {renderPage()}
                 </main>
             </div>

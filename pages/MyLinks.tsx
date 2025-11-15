@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState } from 'react';
 import { User, Link, LinkStatus } from '../types';
 import { MOCK_LINKS } from '../mockData';
@@ -9,12 +8,12 @@ interface MyLinksProps {
 }
 
 const StatusBadge: React.FC<{ status: LinkStatus }> = ({ status }) => {
-    const baseClasses = "px-2 py-1 text-xs font-semibold rounded-full";
+    const baseClasses = "px-2 py-1 text-xs font-semibold rounded-full capitalize";
     const statusClasses = {
-        [LinkStatus.APPROVED]: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-        [LinkStatus.PENDING]: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-        [LinkStatus.REJECTED]: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-        [LinkStatus.ARCHIVED]: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200",
+        [LinkStatus.APPROVED]: "bg-green-100 text-green-800",
+        [LinkStatus.PENDING]: "bg-yellow-100 text-yellow-800",
+        [LinkStatus.REJECTED]: "bg-red-100 text-red-800",
+        [LinkStatus.ARCHIVED]: "bg-gray-100 text-gray-800",
     };
     return <span className={`${baseClasses} ${statusClasses[status]}`}>{status}</span>;
 };
@@ -55,8 +54,8 @@ export const MyLinks: React.FC<MyLinksProps> = ({ currentUser }) => {
                     aria-current={currentPage === number ? 'page' : undefined}
                     className={`flex items-center justify-center px-3 h-8 leading-tight ${
                         currentPage === number
-                            ? 'z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
-                            : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                            ? 'z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100'
+                            : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'
                     }`}
                 >
                     {number}
@@ -66,11 +65,11 @@ export const MyLinks: React.FC<MyLinksProps> = ({ currentUser }) => {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div className="bg-white border border-gray-200 p-6 rounded-xl">
             <h2 className="text-2xl font-bold mb-6">My Links</h2>
             <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-full text-sm text-left text-gray-500">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th scope="col" className="px-6 py-3">Title</th>
                             <th scope="col" className="px-6 py-3">Short URL</th>
@@ -82,8 +81,8 @@ export const MyLinks: React.FC<MyLinksProps> = ({ currentUser }) => {
                     </thead>
                     <tbody>
                         {currentLinks.map(link => (
-                            <tr key={link.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr key={link.id} className="bg-white border-b hover:bg-gray-50">
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {link.title}
                                 </th>
                                 <td className="px-6 py-4">
@@ -102,22 +101,22 @@ export const MyLinks: React.FC<MyLinksProps> = ({ currentUser }) => {
                 </table>
             </div>
             {userLinks.length === 0 && (
-                <p className="text-center text-gray-500 dark:text-gray-400 py-8">You haven't created any links yet.</p>
+                <p className="text-center text-gray-500 py-8">You haven't created any links yet.</p>
             )}
              {userLinks.length > linksPerPage && (
                 <nav className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 pt-4" aria-label="Table navigation">
-                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    <span className="text-sm font-normal text-gray-500">
                         Showing
-                        <span className="font-semibold text-gray-900 dark:text-white mx-1">{indexOfFirstLink + 1}-{Math.min(indexOfLastLink, userLinks.length)}</span>
+                        <span className="font-semibold text-gray-900 mx-1">{indexOfFirstLink + 1}-{Math.min(indexOfLastLink, userLinks.length)}</span>
                         of
-                        <span className="font-semibold text-gray-900 dark:text-white mx-1">{userLinks.length}</span>
+                        <span className="font-semibold text-gray-900 mx-1">{userLinks.length}</span>
                     </span>
                     <ul className="inline-flex items-center -space-x-px">
                         <li>
                             <button
                                 onClick={() => paginate(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
+                                className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
                             >
                                 Previous
                             </button>
@@ -127,7 +126,7 @@ export const MyLinks: React.FC<MyLinksProps> = ({ currentUser }) => {
                             <button
                                 onClick={() => paginate(currentPage + 1)}
                                 disabled={currentPage === totalPages}
-                                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
+                                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
                             >
                                 Next
                             </button>

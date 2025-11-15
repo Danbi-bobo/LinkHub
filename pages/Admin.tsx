@@ -10,17 +10,17 @@ import { CategoryManagement } from '../components/admin/CategoryManagement';
 type AdminSection = 'links' | 'users' | 'departments' | 'teams' | 'projects' | 'categories' | 'logs';
 
 const AdminCard: React.FC<{ title: string; description: string; icon: React.ReactNode; onClick: () => void }> = ({ title, description, icon, onClick }) => (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="bg-white border border-gray-200 p-6 rounded-xl hover:border-blue-500 transition-colors duration-300">
         <div className="flex items-center mb-4">
-            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full mr-4 text-blue-500">
+            <div className="p-3 bg-blue-100 rounded-full mr-4 text-blue-500">
                 {icon}
             </div>
             <h3 className="text-xl font-bold">{title}</h3>
         </div>
-        <p className="text-gray-600 dark:text-gray-400">{description}</p>
+        <p className="text-gray-600">{description}</p>
         <button 
             onClick={onClick}
-            className="mt-6 text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+            className="mt-6 text-sm font-semibold text-blue-600 hover:text-blue-800">
             Manage &rarr;
         </button>
     </div>
@@ -47,7 +47,7 @@ export const Admin: React.FC = () => {
             case 'teams': return <TeamManagement />;
             case 'projects': return <ProjectManagement />;
             case 'categories': return <CategoryManagement />;
-            case 'logs': return <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"><p>Audit logs coming soon...</p></div>;
+            case 'logs': return <div className="bg-white border border-gray-200 p-6 rounded-xl"><p>Audit logs coming soon...</p></div>;
             default:
                 return (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -72,7 +72,7 @@ export const Admin: React.FC = () => {
             {activeSection && (
                  <button 
                     onClick={() => setActiveSection(null)} 
-                    className="flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mb-6">
+                    className="flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 mb-6">
                     <span className="mr-2">&larr;</span>
                     Back to Admin Console
                 </button>

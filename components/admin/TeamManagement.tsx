@@ -42,16 +42,15 @@ export const TeamManagement: React.FC = () => {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div className="bg-white border border-gray-200 p-6 rounded-xl">
             <div className="flex justify-end mb-4">
-                 {/* Fix: Removed size prop from AddIcon as it does not accept it. */}
-                 <button onClick={() => openModal()} className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-blue-600 rounded-lg shrink-0 hover:bg-blue-700">
+                 <button onClick={() => openModal()} className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 hover:bg-blue-600">
                     <AddIcon/> <span className="ml-2">Add Team</span>
                 </button>
             </div>
             <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-full text-sm text-left text-gray-500">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th className="px-6 py-3">Name</th>
                             <th className="px-6 py-3">Association</th>
@@ -60,8 +59,8 @@ export const TeamManagement: React.FC = () => {
                     </thead>
                     <tbody>
                         {teams.map(team => (
-                            <tr key={team.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{team.name}</td>
+                            <tr key={team.id} className="bg-white border-b">
+                                <td className="px-6 py-4 font-medium text-gray-900">{team.name}</td>
                                 <td className="px-6 py-4">{getParentName(team)}</td>
                                 <td className="px-6 py-4 flex gap-4">
                                     <button onClick={() => openModal(team)} className="text-gray-500 hover:text-yellow-500"><EditIcon/></button>
@@ -74,24 +73,24 @@ export const TeamManagement: React.FC = () => {
             </div>
 
             {isModalOpen && currentTeam && (
-                 <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-center items-center">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg p-8 w-full max-w-md">
+                 <div className="fixed inset-0 bg-white bg-opacity-75 z-40 flex justify-center items-center backdrop-blur-sm">
+                    <div className="bg-white rounded-lg border border-gray-200 p-8 w-full max-w-md">
                         <h2 className="text-xl font-bold mb-4">{currentTeam.id ? 'Edit' : 'Add'} Team</h2>
                         <div className="space-y-4">
-                            <input type="text" placeholder="Team Name" value={currentTeam.name || ''} onChange={e => setCurrentTeam({...currentTeam, name: e.target.value})} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"/>
-                             <select value={currentTeam.departmentId || ''} onChange={e => setCurrentTeam({...currentTeam, departmentId: e.target.value || undefined, projectId: undefined})} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
+                            <input type="text" placeholder="Team Name" value={currentTeam.name || ''} onChange={e => setCurrentTeam({...currentTeam, name: e.target.value})} className="w-full p-2 border rounded border-gray-300"/>
+                             <select value={currentTeam.departmentId || ''} onChange={e => setCurrentTeam({...currentTeam, departmentId: e.target.value || undefined, projectId: undefined})} className="w-full p-2 border rounded border-gray-300">
                                 <option value="">Assign to Department...</option>
                                 {MOCK_DEPARTMENTS.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
                             </select>
                             <div className="text-center text-xs text-gray-500">OR</div>
-                             <select value={currentTeam.projectId || ''} onChange={e => setCurrentTeam({...currentTeam, projectId: e.target.value || undefined, departmentId: undefined})} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
+                             <select value={currentTeam.projectId || ''} onChange={e => setCurrentTeam({...currentTeam, projectId: e.target.value || undefined, departmentId: undefined})} className="w-full p-2 border rounded border-gray-300">
                                 <option value="">Assign to Project...</option>
                                 {MOCK_PROJECTS.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                             </select>
                         </div>
                         <div className="flex justify-end gap-4 mt-6">
-                            <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500">Cancel</button>
-                            <button onClick={handleSave} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save</button>
+                            <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+                            <button onClick={handleSave} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Save</button>
                         </div>
                     </div>
                 </div>
